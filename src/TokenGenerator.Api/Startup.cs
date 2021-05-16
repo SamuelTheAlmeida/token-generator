@@ -1,13 +1,14 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using TokenGenerator.CrossCutting.IoC;
-using TokenGenerator.Domain.Command.MapperProfiles;
+using Newtonsoft.Json.Serialization;
+using TokenGenerator.Api.IoC;
+using TokenGenerator.Api.Middlewares;
 using TokenGenerator.Infrastructure.Data.Context;
 
 namespace TokenGenerator.Api
@@ -24,11 +25,20 @@ namespace TokenGenerator.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(CommandProfiles));
-            services.RegisterServices();
             services.AddDbContext<DatabaseContext>();
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation()
+                .AddNewtonsoftJson(opt =>
+                    {
+                        opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                        opt.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                        opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    })
+                .AddJsonOptions(opt => { opt.JsonSerializerOptions.PropertyNameCaseInsensitive = true; });
+
+            services.RegisterServices();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TokenGenerator.Api", Version = "v1" });
@@ -37,13 +47,15 @@ namespace TokenGenerator.Api
             // Disable default API Model validation
             services.Configure<ApiBehaviorOptions>(options =>
             {
-                options.SuppressModelStateInvalidFilter = true;
+                //options.SuppressModelStateInvalidFilter = true;
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -56,6 +68,10 @@ namespace TokenGenerator.Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            // Add default exception handler for unhandled errors
+            // Only return the exception if set in appsettings
+            app.ConfigureExceptionHandler(Configuration.GetValue<bool>("InternalServerErrorWithException"));
 
             app.UseEndpoints(endpoints =>
             {
