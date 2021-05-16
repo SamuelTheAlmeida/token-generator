@@ -23,4 +23,8 @@
     <ProjectReference Include="..\TokenGenerator.Infrastructure.Data\TokenGenerator.Infrastructure.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 </Project>

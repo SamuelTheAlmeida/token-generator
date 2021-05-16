@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using TokenGenerator.Domain.Command.Commands.ValidateToken;
@@ -17,21 +18,25 @@ namespace TokenGenerator.Domain.Command.ValidateToken
         private readonly ICreateTokenCommandHandler _createTokenCommandHandler;
         private readonly ICardRepository _cardRepository;
         private readonly IValidator<ValidateTokenCommand> _validator;
+        private readonly ILogger _logger;
 
         public ValidateTokenCommandHandler(
             ICreateTokenCommandHandler createTokenCommandHandler,
             ICardRepository cardRepository,
-            IValidator<ValidateTokenCommand> validator
+            IValidator<ValidateTokenCommand> validator,
+            ILogger logger
             )
         {
             _createTokenCommandHandler = createTokenCommandHandler;
             _cardRepository = cardRepository;
             _validator = validator;
+            _logger = logger;
         }
 
         public async Task<ApplicationResult<ValidateTokenCommandResponse>> HandleAsync(ValidateTokenCommand command)
-        {    
+        {
             // Validate the command
+            _logger.LogInformation($"Processing token validation for Card: {command.CardId}");
             var validationResult = await _validator.ValidateAsync(command);
             if (!validationResult.IsValid)
             {
@@ -46,12 +51,14 @@ namespace TokenGenerator.Domain.Command.ValidateToken
             var card = await _cardRepository.FindOneAsync(x => x.CardId == command.CardId);
             if (card is null)
             {
+                _logger.LogInformation($"Card not found in database");
                 return new ApplicationResult<ValidateTokenCommandResponse>(
                     success: true,
                     message: DefaultResults.Success,
                     data: new ValidateTokenCommandResponse(false));
             }
 
+            _logger.LogInformation($"Card found - CardNumber {card.CardNumber}");
             // Recreate the token
             var createTokenCommand = new CreateTokenCommand(
                 card.CardNumber
@@ -62,6 +69,7 @@ namespace TokenGenerator.Domain.Command.ValidateToken
             var token = await _createTokenCommandHandler.HandleAsync(createTokenCommand);
             var data = new ValidateTokenCommandResponse(IsValid(token, command, card));
 
+            _logger.LogInformation($"Finished token validation - Validated: {data.Validated}");
             return new ApplicationResult<ValidateTokenCommandResponse>(
                 success: true,
                 message: DefaultResults.Success,

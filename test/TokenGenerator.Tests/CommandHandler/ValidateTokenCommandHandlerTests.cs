@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Microsoft.Extensions.Logging;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
@@ -21,10 +22,13 @@ namespace TokenGenerator.Tests.CommandHandler
         {
             _cardRepository = new Mock<ICardRepository>();
             _createTokenCommandHandler = new Mock<ICreateTokenCommandHandler>();
+
+            var logger = new Mock<ILogger>();
             _validateTokenCommandHandler = new ValidateTokenCommandHandler(
                 _createTokenCommandHandler.Object,
                 _cardRepository.Object,
-                new ValidateTokenCommandValidator());
+                new ValidateTokenCommandValidator(),
+                logger.Object);
         }
 
         [Test]

@@ -9,10 +9,8 @@ namespace TokenGenerator.Domain.Command.CreateToken
 {
     public class CreateTokenCommandHandler : ICreateTokenCommandHandler
     {
-
         public CreateTokenCommandHandler()
         {
-
         }
 
         public async Task<Guid> HandleAsync(CreateTokenCommand command)
