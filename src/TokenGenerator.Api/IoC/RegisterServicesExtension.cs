@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using TokenGenerator.Domain.Command.Commands.SaveCard;
+using TokenGenerator.Domain.Command.Commands.ValidateToken;
 using TokenGenerator.Domain.Command.CreateToken;
 using TokenGenerator.Domain.Command.Interfaces.CommandHandler;
 using TokenGenerator.Domain.Command.Interfaces.Repositories;
@@ -14,6 +15,7 @@ namespace TokenGenerator.Api.IoC
         public static void RegisterServices(this IServiceCollection services) 
         {
             services.AddTransient<IValidator<SaveCardCommand>, SaveCardCommandValidator>();
+            services.AddTransient<IValidator<ValidateTokenCommand>, ValidateTokenCommandValidator>();
 
             services.AddScoped<ISaveCardCommandHandler, SaveCardCommandHandler>();
             services.AddScoped<ICreateTokenCommandHandler, CreateTokenCommandHandler>();

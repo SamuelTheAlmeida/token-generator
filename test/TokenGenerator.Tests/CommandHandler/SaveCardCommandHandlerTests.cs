@@ -29,7 +29,6 @@ namespace TokenGenerator.Tests.CommandHandler
         public async Task Should_Save_Card_And_Return_Token()
         {
             // arrange
-            //_createTokenCommandHandler.Setup(p => p.Charge(It.IsAny<double>(), cardMock.Object)).Returns(false);
             var saveCardCommand = Faker.SaveCardCommandFaker.SaveCardCommand().Generate();
             _createTokenCommandHandler.Setup(x => 
                 x.HandleAsync(It.IsAny<CreateTokenCommand>()))
@@ -38,9 +37,7 @@ namespace TokenGenerator.Tests.CommandHandler
             // act
             var result = await _saveCardCommandHandler.HandleAsync(saveCardCommand);
 
-
             // assert
-            //shipmentServiceMock.Verify(s => s.Ship(addressInfoMock.Object, items.AsEnumerable()), Times.Never());
             Assert.IsTrue(result.Success);
             Assert.IsTrue(result.ValidationErrors.Count == 0);
             Assert.IsTrue(result.Data.CardId != null && result.Data.CardId != Guid.Empty);
@@ -62,6 +59,5 @@ namespace TokenGenerator.Tests.CommandHandler
             Assert.IsTrue(result.ValidationErrors.Count > 0);
             Assert.IsTrue(result.Data == null);
         }
-
     }
 }

@@ -6,6 +6,10 @@ namespace TokenGenerator.Domain.Command.CreateToken
     {
         public List<int> CardLastFourDigits { get; set; }
         public int Cvv { get; set; }
+        public CreateTokenCommand()
+        {
+
+        }
 
         public CreateTokenCommand(
             List<int> cardLastFourDigits, 
