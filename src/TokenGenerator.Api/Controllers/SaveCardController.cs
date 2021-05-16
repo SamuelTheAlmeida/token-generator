@@ -21,7 +21,7 @@ namespace TokenGenerator.Api.Controllers
         }
 
         /// <summary>
-        /// Saves the card and generates a token
+        /// Receive a customer card and save it
         /// </summary>
         /// <returns>The generated Token, creationDate and CardId</returns>
         /// <response code="200">Returns the newly created item</response>

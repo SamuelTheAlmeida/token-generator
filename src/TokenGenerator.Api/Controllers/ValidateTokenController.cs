@@ -19,7 +19,12 @@ namespace TokenGenerator.Api.Controllers
             _handler = handler;
         }
 
-        /// <response code="200">Returns the newly created item</response>
+        /// <summary>
+        /// Validates a token based on data provided in the request.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns>A newly created TodoItem</returns>
+        /// <response code="200">Request performed with no errors</response>
         /// <response code="400">Validation error</response>
         /// <response code="500">Unexpected error</response>
         [HttpPost]
