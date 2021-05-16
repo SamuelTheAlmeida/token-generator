@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
-using System.Net;
 using TokenGenerator.Domain.Command.Result;
 using TokenGenerator.Domain.Enums;
 
