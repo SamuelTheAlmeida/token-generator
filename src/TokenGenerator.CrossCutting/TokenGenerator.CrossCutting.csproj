@@ -5,13 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.15" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.15" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TokenGenerator.Domain.Command\TokenGenerator.Domain.Command.csproj" />
-    <ProjectReference Include="..\TokenGenerator.Domain\TokenGenerator.Domain.csproj" />
+    <ProjectReference Include="..\TokenGenerator.Infrastructure.Data\TokenGenerator.Infrastructure.Data.csproj" />
   </ItemGroup>
 
 </Project>

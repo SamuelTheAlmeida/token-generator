@@ -7,8 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.15" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TokenGenerator.CrossCutting\TokenGenerator.CrossCutting.csproj" />
+    <ProjectReference Include="..\TokenGenerator.Domain.Command\TokenGenerator.Domain.Command.csproj" />
+    <ProjectReference Include="..\TokenGenerator.Infrastructure.Data\TokenGenerator.Infrastructure.Data.csproj" />
   </ItemGroup>
 
 </Project>

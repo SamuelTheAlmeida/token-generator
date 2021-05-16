@@ -1,9 +1,19 @@
-﻿namespace TokenGenerator.Domain.Command.CreateToken
+﻿using System.Collections.Generic;
+
+namespace TokenGenerator.Domain.Command.CreateToken
 {
     public class CreateTokenCommand
     {
-        public int CustomerId { get; set; }
-        public long CardNumber { get; set; }
+        public List<int> CardLastFourDigits { get; set; }
         public int Cvv { get; set; }
+
+        public CreateTokenCommand(
+            List<int> cardLastFourDigits, 
+            int cvv
+            )
+        {
+            CardLastFourDigits = cardLastFourDigits;
+            Cvv = cvv;
+        }
     }
 }
