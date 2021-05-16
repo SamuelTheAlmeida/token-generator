@@ -18,13 +18,13 @@ namespace TokenGenerator.Domain.Command.ValidateToken
         private readonly ICreateTokenCommandHandler _createTokenCommandHandler;
         private readonly ICardRepository _cardRepository;
         private readonly IValidator<ValidateTokenCommand> _validator;
-        private readonly ILogger _logger;
+        private readonly ILogger<ValidateTokenCommandHandler> _logger;
 
         public ValidateTokenCommandHandler(
             ICreateTokenCommandHandler createTokenCommandHandler,
             ICardRepository cardRepository,
             IValidator<ValidateTokenCommand> validator,
-            ILogger logger
+            ILogger<ValidateTokenCommandHandler> logger
             )
         {
             _createTokenCommandHandler = createTokenCommandHandler;

@@ -20,7 +20,10 @@ namespace TokenGenerator.Api.Controllers
             _handler = handler;
         }
 
-
+        /// <summary>
+        /// Saves the card and generates a token
+        /// </summary>
+        /// <returns>The generated Token, creationDate and CardId</returns>
         /// <response code="200">Returns the newly created item</response>
         /// <response code="400">Validation error</response>
         /// <response code="500">Unexpected error</response>

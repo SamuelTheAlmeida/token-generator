@@ -1,12 +1,10 @@
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using Newtonsoft.Json.Serialization;
+using TokenGenerator.Api.Extensions;
 using TokenGenerator.Api.IoC;
 using TokenGenerator.Api.Middlewares;
 using TokenGenerator.Infrastructure.Data.Context;
@@ -26,22 +24,11 @@ namespace TokenGenerator.Api
         {
             services.AddDbContext<DatabaseContext>();
 
-            services.AddControllers()
-                .AddFluentValidation()
-                .AddNewtonsoftJson(opt =>
-                    {
-                        opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                        opt.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-                        opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                    })
-                .AddJsonOptions(opt => { opt.JsonSerializerOptions.PropertyNameCaseInsensitive = true; });
+            services.ConfigureWebApi();
 
             services.RegisterServices();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TokenGenerator.Api", Version = "v1" });
-            });
+            services.ConfigureSwagger();
 
             // Disable default API Model validation
             services.Configure<ApiBehaviorOptions>(options =>
@@ -61,9 +48,7 @@ namespace TokenGenerator.Api
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
             // Add default exception handler for unhandled errors

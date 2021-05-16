@@ -16,13 +16,13 @@ namespace TokenGenerator.Domain.Command.Commands.SaveCard
         private readonly ICreateTokenCommandHandler _createTokenCommandHandler;
         private readonly ICardRepository _cardRepository;
         private readonly IValidator<SaveCardCommand> _validator;
-        private readonly ILogger _logger;
+        private readonly ILogger<SaveCardCommandHandler> _logger;
 
         public SaveCardCommandHandler(
             ICreateTokenCommandHandler createTokenCommandHandler,
             ICardRepository cardRepository,
             IValidator<SaveCardCommand> validator,
-            ILogger logger)
+            ILogger<SaveCardCommandHandler> logger)
         {
             _createTokenCommandHandler = createTokenCommandHandler;
             _cardRepository = cardRepository;

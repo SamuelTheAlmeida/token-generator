@@ -23,7 +23,7 @@ namespace TokenGenerator.Tests.CommandHandler
             _cardRepository = new Mock<ICardRepository>();
             _createTokenCommandHandler = new Mock<ICreateTokenCommandHandler>();
 
-            var logger = new Mock<ILogger>();
+            var logger = new Mock<ILogger<ValidateTokenCommandHandler>>();
             _validateTokenCommandHandler = new ValidateTokenCommandHandler(
                 _createTokenCommandHandler.Object,
                 _cardRepository.Object,
