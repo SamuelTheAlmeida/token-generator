@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokenGenerator.Api", "TokenGenerator.Api\TokenGenerator.Api.csproj", "{564B3694-B21F-45BE-9A90-F3D27F37A484}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenGenerator.Domain", "TokenGenerator.Domain\TokenGenerator.Domain.csproj", "{1BFCE6E6-D29D-4BAB-8ADE-82C82326D4EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokenGenerator.Domain", "TokenGenerator.Domain\TokenGenerator.Domain.csproj", "{1BFCE6E6-D29D-4BAB-8ADE-82C82326D4EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenGenerator.Domain.Command", "TokenGenerator.Domain.Command\TokenGenerator.Domain.Command.csproj", "{2104E38C-53F5-4ABB-9015-AA9CACF800F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokenGenerator.Domain.Command", "TokenGenerator.Domain.Command\TokenGenerator.Domain.Command.csproj", "{2104E38C-53F5-4ABB-9015-AA9CACF800F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenGenerator.Infrastructure.Data", "TokenGenerator.Infrastructure.Data\TokenGenerator.Infrastructure.Data.csproj", "{B332B6F7-36E9-427C-8893-BD60A88F165D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokenGenerator.Infrastructure.Data", "TokenGenerator.Infrastructure.Data\TokenGenerator.Infrastructure.Data.csproj", "{B332B6F7-36E9-427C-8893-BD60A88F165D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokenGenerator.Tests", "..\test\TokenGenerator.Tests\TokenGenerator.Tests.csproj", "{24931580-FF8C-486C-BC58-3981A1AE99C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B332B6F7-36E9-427C-8893-BD60A88F165D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B332B6F7-36E9-427C-8893-BD60A88F165D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B332B6F7-36E9-427C-8893-BD60A88F165D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24931580-FF8C-486C-BC58-3981A1AE99C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24931580-FF8C-486C-BC58-3981A1AE99C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24931580-FF8C-486C-BC58-3981A1AE99C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24931580-FF8C-486C-BC58-3981A1AE99C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
